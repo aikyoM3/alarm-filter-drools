@@ -1,0 +1,31 @@
+package rules
+
+import com.neo.drools.entity.*;
+
+dialect "Java"
+
+rule "Pod down from Node down"
+enabled true
+    when
+        $pod : ExtendedAlarm(eval(getErrorCode().equals("VNFC_DOWN")))
+        $node: ExtendedAlarm(eval(getErrorCode().equals("NODE_DOWN")))
+
+        eval($pod.getSubObjectInstanceId().equals($node.getObjectInstanceId()))
+
+    then
+        modify($node) {addChild($pod)}
+        modify($pod) {setParent($node)}
+end
+
+rule "Node down from Port down"
+enabled true
+    when
+        $port : ExtendedAlarm(eval(getErrorCode().equals("PORT_DOWN")))
+        $node: ExtendedAlarm(eval(getErrorCode().equals("NODE_DOWN")))
+
+        eval($port.getObjectInstanceId().equals($node.getObjectInstanceId()))
+
+    then
+        modify($port) {addChild($node)}
+        modify($node) {setParent($port)}
+end

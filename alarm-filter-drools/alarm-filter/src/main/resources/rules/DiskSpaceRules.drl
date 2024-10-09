@@ -1,0 +1,31 @@
+package rules;
+
+import com.neo.drools.entity.*;
+
+dialect "Java"
+
+rule "Node low disk space leads to pod performance drop"
+enabled true
+    when
+        $pod : ExtendedAlarm(eval($pod.getErrorCode().equals("SUCCESS_RATE_UNDER_THRESHOLD")))
+        $node: ExtendedAlarm(eval($node.getErrorCode().equals("NODE_LOW_DISK_SPACE")))
+
+        eval($pod.getSubObjectInstanceId().equals($node.getObjectInstanceId()))
+
+    then
+        modify($node) {addChild($pod)}
+        modify($pod) {setParent($node)}
+end
+
+rule "Node low disk space leads to pod evicted"
+enabled true
+    when
+        $pod : ExtendedAlarm(eval($pod.getErrorCode().equals("VNFC_DOWN")))
+        $node: ExtendedAlarm(eval($node.getErrorCode().equals("NODE_LOW_DISK_SPACE")))
+
+        eval($pod.getSubObjectInstanceId().equals($node.getObjectInstanceId()))
+
+    then
+        modify($node) {addChild($pod)}
+        modify($pod) {setParent($node)}
+end

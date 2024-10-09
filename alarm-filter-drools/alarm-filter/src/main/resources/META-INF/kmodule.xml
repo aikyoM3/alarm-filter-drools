@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://www.drools.org/xsd/kmodule">
+
+    <kbase name="point-rulesKB" packages="otherRules">
+        <ksession name="point-rulesKS"/>
+    </kbase>
+
+    <kbase name="HelloWorldKB" packages="otherRules">
+        <ksession name="HelloWorldKS"/>
+    </kbase>
+
+    <kbase name="AlarmKB" packages="rules">
+        <ksession name="AlarmKS"/>
+    </kbase>
+
+
+</kmodule>

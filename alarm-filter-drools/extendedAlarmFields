@@ -1,0 +1,37 @@
+CNF metadata:
+	hostName
+	fault_details_replacement_mode
+	hostIp
+	errorCode
+	vnfcHostId
+	vim_object_name
+	keyResolve
+	serviceName
+	managedObjectType
+VIM metadata
+	severity
+	metricName
+	instance
+	exporterType
+	alertType
+	prometheusIp
+	mano_object_name
+	crossingDirectionType
+	alertName
+	managedSubObjectTargetType
+	mano_object
+	errorCode
+	thresholdValue
+	managedObjectType
+	mountPoint
+	exporter
+	rawAlertName
+	managedObjectTargetType
+	expr
+	crossingDirection
+	job
+	device
+	fstype
+	group
+
+Report link: https://docs.google.com/document/d/1v3BWldiq2EnFd6IXvBU-pse0WFdFCGGK/edit?usp=sharing&ouid=104645923974048440640&rtpof=true&sd=true
